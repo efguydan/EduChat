@@ -92,6 +92,40 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/password_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mid_space"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:textColor="@color/text_purple"
+                android:inputType="textPassword" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/confirm_password_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mid_space"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirm_password"
+                android:textColor="@color/text_purple"
+                android:inputType="textPassword" />
+
+        </android.support.design.widget.TextInputLayout>
+
         <View
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,7 +136,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/solid_background"
-            android:text="@string/submit"
+            android:text="@string/register"
             android:textColor="@color/white"
             android:backgroundTint="@color/colorPrimary"
             android:layout_marginTop="@dimen/very_large_space"

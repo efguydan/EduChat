@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.cottacush.android.libraries.utils.ViewUtils;
 import com.vggbudge.educhat.R;
 import com.vggbudge.educhat.base.BaseActivity;
+import com.vggbudge.educhat.login.register.RegisterFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -100,9 +101,9 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void showRegisterScreen() {
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .add(R.id.view_container, RegisterFragment.newInstance())
-//                .commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.view_container, RegisterFragment.newInstance())
+                .commit();
     }
 }
