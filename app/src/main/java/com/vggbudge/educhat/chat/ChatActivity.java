@@ -12,6 +12,7 @@ import com.github.bassaer.chatmessageview.view.ChatView;
 import com.vggbudge.educhat.R;
 import com.vggbudge.educhat.base.BaseActivity;
 import com.vggbudge.educhat.network.models.Question;
+import com.vggbudge.educhat.utils.Data;
 import com.vggbudge.educhat.utils.Provider;
 
 import java.util.ArrayList;
@@ -31,11 +32,11 @@ public class ChatActivity extends BaseActivity<ChatContract.Presenter> implement
 
         int humanId = 0;
         Bitmap humanIcon = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_account);
-        String humanName = "Dapo";
+        String humanName = Data.userName;
 
         int botId = 1;
         Bitmap botIcon = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_account);
-        String botName = "EduChat";
+        String botName = Data.botName;
 
 
 
@@ -61,8 +62,9 @@ public class ChatActivity extends BaseActivity<ChatContract.Presenter> implement
                 final Message receivedMessage = new Message.Builder()
                         .setUser(chatBot)
                         .setRight(false)
-                        .setText(ChatBot.INSTANCE.talk(chatBot.getName(),message.getText()))
+                        .setText("A minute, I am still learning")
                         .build();
+                mChatView.send(receivedMessage);
 
             }
         });
