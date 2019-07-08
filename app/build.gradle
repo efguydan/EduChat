@@ -9,7 +9,7 @@ android {
     def versionPatch = 0
     def versionNumber = 0
     defaultConfig {
-        applicationId "com.efedaniel.notepad"
+        applicationId "com.vggbudge.educhat"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode versionNumber

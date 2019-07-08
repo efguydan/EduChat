@@ -3,25 +3,26 @@ package com.vggbudge.educhat.chat;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.View;
 
 import com.github.bassaer.chatmessageview.model.ChatUser;
 import com.github.bassaer.chatmessageview.model.Message;
-import com.github.bassaer.chatmessageview.util.ChatBot;
 import com.github.bassaer.chatmessageview.view.ChatView;
 import com.vggbudge.educhat.R;
 import com.vggbudge.educhat.base.BaseActivity;
 import com.vggbudge.educhat.network.models.Question;
-import com.vggbudge.educhat.utils.Data;
 import com.vggbudge.educhat.utils.Provider;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ChatActivity extends BaseActivity<ChatContract.Presenter> implements ChatContract.View {
 
     private ChatContract.Presenter presenter;
     private ChatView mChatView;
     private Question currentQuestion;
+    private ChatUser user;
+    private ChatUser budge;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,38 +34,19 @@ public class ChatActivity extends BaseActivity<ChatContract.Presenter> implement
 
         int humanId = 0;
         Bitmap humanIcon = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_account);
-        String humanName = Data.userName;
+        String humanName = "You";
 
         int botId = 1;
         Bitmap botIcon = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_account);
-        String botName = Data.botName;
+        String botName = "Budge";
 
-
-
-        final ChatUser user = new ChatUser(humanId,humanName,humanIcon);
-        final ChatUser chatBot = new ChatUser(botId,botName,botIcon);
+        user = new ChatUser(humanId,humanName,humanIcon);
+        budge = new ChatUser(botId,botName,botIcon);
 
         mChatView.setOnClickSendButtonListener(v -> {
-
-            Message message = new Message.Builder()
-                    .setUser(user)
-                    .setRight(true)
-                    .setText(mChatView.getInputText())
-                    .hideIcon(true)
-                    .build();
-            //Set to chat view
-            mChatView.send(message);
-            //Reset edit text
+            sendHumanMessage(mChatView.getInputText());
             mChatView.setInputText("");
-
-            //Receive message
-            final Message receivedMessage = new Message.Builder()
-                    .setUser(chatBot)
-                    .setRight(false)
-                    .setText("A minute, I am still learning")
-                    .build();
-            mChatView.send(receivedMessage);
-
+            sendBotMessage("I am still learning");
         });
 
         presenter = new ChatPresenter(this, Provider.provideQuestionRepository());
@@ -84,12 +66,39 @@ public class ChatActivity extends BaseActivity<ChatContract.Presenter> implement
         startEndSequence();
     }
 
-    private void startEndSequence() {
-        //TODO What happens after the question list has finished
-    }
 
     private void interactWithUser(Question question) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(question.questionStatement);
+        question.incorrectAnswers.add(question.correctAnswer);
+        stringBuilder.append("\n" + question.correctAnswer);
+        Collections.shuffle(question.incorrectAnswers);
+        for (String wrongAnswer : question.incorrectAnswers) {
+            stringBuilder.append("\n" + wrongAnswer);
+        }
+        sendBotMessage(stringBuilder.toString());
+    }
 
+    private void sendHumanMessage(String message) {
+        final Message receivedMessage = new Message.Builder()
+                .setUser(user)
+                .setRight(true)
+                .setText(message)
+                .build();
+        mChatView.send(receivedMessage);
+    }
+
+    private void sendBotMessage(String message) {
+        final Message receivedMessage = new Message.Builder()
+                .setUser(budge)
+                .setRight(false)
+                .setText(message)
+                .build();
+        mChatView.send(receivedMessage);
+    }
+
+    private void startEndSequence() {
+        //TODO What happens after the question list has finished
     }
 
     @Override
