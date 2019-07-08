@@ -4,8 +4,8 @@ VGG Hackathon Team Budge
 
 ## Contributors:
    - Efe Ejemudaro <EfeEjemudaro@gmail.com>
-   - Jeremiah Adeleye <>
-   - Obaloluwa Abioye <>
+   - Jeremiah Adeleye <jerryb.adeleye@gmail.com>
+   - Obaloluwa Abioye <horbarz007@gmail.com>
 
 
 ## Libraries Setup Include:
