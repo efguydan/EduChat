@@ -155,7 +155,7 @@ public class ChatActivity extends BaseActivity<ChatContract.Presenter> implement
     private void exitScreen() {
         new Handler().postDelayed(() -> {
             finish();
-        }, 1200);
+        }, 3000);
     }
 
     private void startLoadingQuestions() {
@@ -330,7 +330,7 @@ public class ChatActivity extends BaseActivity<ChatContract.Presenter> implement
     private void startEndSequence() {
         //TODO What happens after the question list has finished
         sendBotMessage("You have finished your quiz. Your Score was");
-        sendBotMessage(String.format("%d out of %d", totalGotten, amountOfCourses));
+        sendBotMessage(totalGotten + " out of " + amountOfCourses);
         sendBotMessage("Press Restart to start over or exit to quit");
     }
 
