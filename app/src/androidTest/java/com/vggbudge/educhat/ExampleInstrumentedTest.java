@@ -1,4 +1,4 @@
-package com.vggbudge.educhat.baseProject;
+package com.vggbudge.educhat;
 
 
 import android.content.Context;

@@ -39,6 +39,10 @@ public class JsendResponse {
         return successBody.getAsJsonObject().get("data");
     }
 
+    public JsonElement getResultsAsArray() {
+        return successBody.getAsJsonObject().get("results").getAsJsonArray();
+    }
+
     public JsonElement getDataAsObject() {
         return successBody.getAsJsonObject().get("data").getAsJsonObject();
     }
