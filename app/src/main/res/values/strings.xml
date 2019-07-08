@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Notepad</string>
+    <string name="app_name">EduChat</string>
     <string name="time_out_err_msg">Timeout!!! Confirm that you have a working internet connection</string>
     <string name="network_err">Internet connection is not available</string>
     <string name="title_activity_main">MainActivity</string>
