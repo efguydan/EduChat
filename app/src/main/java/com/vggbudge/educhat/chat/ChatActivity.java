@@ -21,6 +21,7 @@ public class ChatActivity extends BaseActivity<ChatContract.Presenter> implement
 
     private ChatContract.Presenter presenter;
     private ChatView mChatView;
+    private Question currentQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,40 +44,52 @@ public class ChatActivity extends BaseActivity<ChatContract.Presenter> implement
         final ChatUser user = new ChatUser(humanId,humanName,humanIcon);
         final ChatUser chatBot = new ChatUser(botId,botName,botIcon);
 
-        mChatView.setOnClickSendButtonListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mChatView.setOnClickSendButtonListener(v -> {
 
-                Message message = new Message.Builder()
-                        .setUser(user)
-                        .setRight(true)
-                        .setText(mChatView.getInputText())
-                        .hideIcon(true)
-                        .build();
-                //Set to chat view
-                mChatView.send(message);
-                //Reset edit text
-                mChatView.setInputText("");
+            Message message = new Message.Builder()
+                    .setUser(user)
+                    .setRight(true)
+                    .setText(mChatView.getInputText())
+                    .hideIcon(true)
+                    .build();
+            //Set to chat view
+            mChatView.send(message);
+            //Reset edit text
+            mChatView.setInputText("");
 
-                //Receive message
-                final Message receivedMessage = new Message.Builder()
-                        .setUser(chatBot)
-                        .setRight(false)
-                        .setText("A minute, I am still learning")
-                        .build();
-                mChatView.send(receivedMessage);
+            //Receive message
+            final Message receivedMessage = new Message.Builder()
+                    .setUser(chatBot)
+                    .setRight(false)
+                    .setText("A minute, I am still learning")
+                    .build();
+            mChatView.send(receivedMessage);
 
-            }
         });
 
         presenter = new ChatPresenter(this, Provider.provideQuestionRepository());
         //sample
-        presenter.loadSampleData("10", "9", "easy", null);
+        presenter.loadSampleData("20", "9", "easy", null);
     }
 
     @Override
     public void onQuestionsLoaded(ArrayList<Question> questionList) {
-        showToast(questionList.get(0).questionStatement);
+        startQuestionSequence(questionList);
+    }
+
+    private void startQuestionSequence(ArrayList<Question> questionList) {
+        while(!questionList.isEmpty()) {
+            interactWithUser(questionList.remove(0));
+        }
+        startEndSequence();
+    }
+
+    private void startEndSequence() {
+        //TODO What happens after the question list has finished
+    }
+
+    private void interactWithUser(Question question) {
+
     }
 
     @Override
