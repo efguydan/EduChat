@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.vggbudge.educhat.R;
+import com.vggbudge.educhat.chat.ChatActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         int delay = 3000;
         handler.postDelayed(() -> {
-            Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+            Intent intent = new Intent(SplashScreenActivity.this, ChatActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
