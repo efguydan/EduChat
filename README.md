@@ -1,6 +1,9 @@
 # EduChat
 VGG Hackathon Team Budge
 
+## About Project
+EduChatBot is a conversational bot that serves the user a specified number of questions on a specified topic at a specified difficulty level and the user supplies the answer, all in a single chat screen.
+
 
 ## Contributors:
    - Efe Ejemudaro <EfeEjemudaro@gmail.com>
