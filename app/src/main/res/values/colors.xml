@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#003366</color>
-    <color name="colorPrimaryDark">#002042</color>
+    <color name="colorPrimaryDark">#0B315A</color>
     <color name="colorAccent">#666699</color>
     <color name="white">#ffffff</color>
     <color name="black">#ff000000</color>
     <color name="text_grey">#6F7172</color>
     <color name="text_purple">#2E2E42</color>
+    <color name="human_bg">#438AFE</color>
+    <color name="bot_bg">#C8D3F0</color>
 </resources>
