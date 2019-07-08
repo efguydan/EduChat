@@ -56,6 +56,7 @@ dependencies {
     })
 
     //Android Support dependencies
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
@@ -72,6 +73,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    //dialog flow dependencies
+    implementation 'ai.api:sdk:2.0.7@aar'
+    implementation 'ai.api:libai:1.6.12'
+
+    //chat view library
+    implementation 'com.github.bassaer:chatmessageview:1.11.0'
 
 }
 
