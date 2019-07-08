@@ -22,6 +22,8 @@ public class ChatActivity extends BaseActivity<ChatContract.Presenter> implement
     private Question currentQuestion;
     private ChatUser user;
     private ChatUser budge;
+    private boolean expectingAnswerToQuestion;
+    private ArrayList<Question> questionList;
 
 
     @Override
@@ -44,9 +46,15 @@ public class ChatActivity extends BaseActivity<ChatContract.Presenter> implement
         budge = new ChatUser(botId,botName,botIcon);
 
         mChatView.setOnClickSendButtonListener(v -> {
-            sendHumanMessage(mChatView.getInputText());
+            if (expectingAnswerToQuestion) {
+                String answer = mChatView.getInputText();
+                sendHumanMessage(answer);
+                verifyAnswer(answer);
+            } else {
+                sendHumanMessage(mChatView.getInputText());
+                sendBotMessage("I am still learning");
+            }
             mChatView.setInputText("");
-            sendBotMessage("I am still learning");
         });
 
         presenter = new ChatPresenter(this, Provider.provideQuestionRepository());
@@ -54,24 +62,36 @@ public class ChatActivity extends BaseActivity<ChatContract.Presenter> implement
         presenter.loadSampleData("20", "9", "easy", null);
     }
 
+    private void verifyAnswer(String answer) {
+        if (answer.equalsIgnoreCase(currentQuestion.correctAnswer)) {
+            sendBotMessage("Nice one, That was correct!");
+            startQuestionSequence();
+        } else {
+            sendBotMessage("That was wrong,Please try again");
+            currentQuestion.incorrectAnswers.remove(currentQuestion.correctAnswer);
+            interactWithUser(currentQuestion);
+        }
+    }
+
     @Override
     public void onQuestionsLoaded(ArrayList<Question> questionList) {
-        startQuestionSequence(questionList);
+        this.questionList = questionList;
+        startQuestionSequence();
     }
 
-    private void startQuestionSequence(ArrayList<Question> questionList) {
-        while(!questionList.isEmpty()) {
-            interactWithUser(questionList.remove(0));
+    private void startQuestionSequence() {
+        interactWithUser(questionList.remove(0));
+        if (questionList.isEmpty()) {
+            startEndSequence();
         }
-        startEndSequence();
     }
-
 
     private void interactWithUser(Question question) {
+        expectingAnswerToQuestion = true;
+        currentQuestion = question;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(question.questionStatement);
         question.incorrectAnswers.add(question.correctAnswer);
-        stringBuilder.append("\n" + question.correctAnswer);
         Collections.shuffle(question.incorrectAnswers);
         for (String wrongAnswer : question.incorrectAnswers) {
             stringBuilder.append("\n" + wrongAnswer);
