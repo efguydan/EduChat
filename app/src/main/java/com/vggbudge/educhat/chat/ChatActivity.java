@@ -1,11 +1,13 @@
 package com.vggbudge.educhat.chat;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.vggbudge.educhat.R;
 import com.vggbudge.educhat.base.BaseActivity;
+import com.vggbudge.educhat.network.models.Question;
 import com.vggbudge.educhat.utils.Provider;
+
+import java.util.ArrayList;
 
 public class ChatActivity extends BaseActivity<ChatContract.Presenter> implements ChatContract.View {
 
@@ -16,6 +18,13 @@ public class ChatActivity extends BaseActivity<ChatContract.Presenter> implement
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         presenter = new ChatPresenter(this, Provider.provideQuestionRepository());
+        //sample
+        presenter.loadSampleData("10", "9", "easy", null);
+    }
+
+    @Override
+    public void onQuestionsLoaded(ArrayList<Question> questionList) {
+        showToast(questionList.get(0).questionStatement);
     }
 
     @Override

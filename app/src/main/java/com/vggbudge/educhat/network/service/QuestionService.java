@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface QuestionService {
 
-    @GET()
+    @GET("api.php")
     Call<JsonElement> getQuestions(@Query("amount") @Nullable String amount, @Query("category") @Nullable String category,
                                    @Query("difficulty") @Nullable String difficulty, @Query("type") @Nullable String type);
 }

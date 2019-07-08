@@ -1,4 +1,4 @@
-package com.vggbudge.educhat.network.model;
+package com.vggbudge.educhat.network.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

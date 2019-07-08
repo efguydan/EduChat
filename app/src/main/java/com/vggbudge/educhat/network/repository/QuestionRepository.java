@@ -1,6 +1,6 @@
 package com.vggbudge.educhat.network.repository;
 
-import com.vggbudge.educhat.network.model.Question;
+import com.vggbudge.educhat.network.models.Question;
 
 import java.util.ArrayList;
 
